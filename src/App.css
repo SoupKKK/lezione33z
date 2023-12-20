@@ -5,6 +5,7 @@
 .container{
   padding: 1%;
   background-color: gray;
+  min-height: 100vh;
 }
 
 .card{

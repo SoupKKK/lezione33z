@@ -3,7 +3,7 @@ import { Container, Card, Button } from 'react-bootstrap';
 
 const Welcome = () => {
   return (
-    <Container>
+    
       <Card className="text-center">
         <Card.Body>
           <Card.Title as="h1">Benvenuti nel nostro negozio!</Card.Title>
@@ -13,7 +13,7 @@ const Welcome = () => {
           <Button variant="secondary">Esplora</Button>
         </Card.Body>
       </Card>
-    </Container>
+    
   );
 };
 
