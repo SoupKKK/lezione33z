@@ -1,28 +1,49 @@
-import React from 'react';
-import { Row, Col, Card } from 'react-bootstrap';
-import fantasy from '../data/fantasy.json';
+import React, { useState } from 'react';
+import { Row, Col, Form } from 'react-bootstrap'; 
+import fantasy from '../data/fantasy.json'
+import SingleBook from './SingleBook';
 
-const Books = () => {
-  if (!Array.isArray(fantasy)) {
-    console.error('Fantasy data is not an array');
-    return null; // Return null or handle the error accordingly
-  }
+const Books = ({ books }) => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedBook, setSelectedBook] = useState(null);
+
+  const changeSelectedBook = (asin) => {
+    setSelectedBook(asin);
+  };
 
   return (
-    <Row>
-      {fantasy.map((book) => {
-        return (
-          <Col xs={12} md={4} lg= {3} key={book.asin}>
-            <Card className="book-cover m-3">
-              <Card.Img src={book.img} alt={`${book.title} cover`} />
-              <Card.Body>
-                <Card.Title>{book.title}</Card.Title>
-              </Card.Body>
-            </Card>
-          </Col>
-        );
-      })}
-    </Row>
+    <>
+      <Row>
+        <Col>
+          <Row>
+            <Col>
+              <Form.Group>
+                <Form.Label>Search a book</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Search here"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            {books
+              .filter((b) => b.title.toLowerCase().includes(searchQuery.toLowerCase()))
+              .map((b) => (
+                <Col xs={12} md={4} lg={3} key={b.asin}>
+                  <SingleBook
+                    book={b}
+                    selectedBook={selectedBook}
+                    changeSelectedBook={changeSelectedBook}
+                  />
+                </Col>
+              ))}
+          </Row>
+        </Col>
+      </Row>
+    </>
   );
 };
 
