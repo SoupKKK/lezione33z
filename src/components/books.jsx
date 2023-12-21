@@ -3,6 +3,8 @@ import { Row, Col, Form } from 'react-bootstrap';
 import fantasy from '../data/fantasy.json'
 import SingleBook from './SingleBook';
 
+import CommentArea from './CommentArea';
+
 const Books = ({ books }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBook, setSelectedBook] = useState(null);
@@ -42,6 +44,10 @@ const Books = ({ books }) => {
               ))}
           </Row>
         </Col>
+        <Col>
+          <CommentArea asin={selectedBook} />
+        </Col>
+          
       </Row>
     </>
   );
